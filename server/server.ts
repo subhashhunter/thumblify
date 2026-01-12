@@ -18,9 +18,9 @@ declare module 'express-session'{
 await connectDB()
 const app = express();
 
-app.use(express.json())
+
 app.use(cors({
-     origin: ['http://localhost:5173','http://localhost:3000','https://thumblify-clinet.vercel.app'],
+     origin: ['http://localhost:5173','http://localhost:3000',"https://thumblify-clinet.vercel.app"],
      credentials:true
 
 }))
@@ -32,10 +32,10 @@ app.use(session({
     resave:false,
     saveUninitialized:false,
     cookie:{
-        maxAge:1000*60*60*24*7,
+        maxAge:1000 * 60 * 60 * 24 * 7,
         httpOnly:true,
-        secure:process.env.NODE_ENV==='production',
-        sameSite:process.env.NODE_ENV==='production' ? 'none':'lax',
+        secure:process.env.NODE_ENV=== 'production',
+        sameSite:process.env.NODE_ENV=== 'production' ? 'none': 'lax',
         path:'/'
     },
     store:MongoStore.create({
@@ -44,6 +44,7 @@ app.use(session({
     })
     
 }))
+app.use(express.json())
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');
 });
