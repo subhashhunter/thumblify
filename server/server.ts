@@ -31,13 +31,11 @@ app.use(session({
     secret:process.env.SESSION_SECRET  as string,
     resave:false,
     saveUninitialized:false,
-    cookie:{
-        maxAge:1000 * 60 * 60 * 24 * 7,
-        httpOnly:true,
-        secure:process.env.NODE_ENV=== 'production',
-        sameSite:process.env.NODE_ENV=== 'production' ? 'none': 'lax',
-        path:'/'
-    },
+    cookie: {
+  secure: false,
+  sameSite: 'none',
+  httpOnly: true
+},
     store:MongoStore.create({
         mongoUrl:process.env.MONGODB_URI as string,
         collectionName:'sessions'
