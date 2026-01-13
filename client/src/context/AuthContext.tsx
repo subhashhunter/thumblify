@@ -21,7 +21,8 @@ const AuthContext=createContext<AuthContextProps>({
     setUser:()=>{},
     login:async()=>{},
     signUp:async()=>{},
-    logout:async()=>{}
+    logout:async()=>{},
+    
 
 })
 

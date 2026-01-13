@@ -18,6 +18,7 @@ declare module 'express-session'{
 await connectDB()
 const app = express();
 
+app.set('trust proxy',1)
 
 app.use(cors({
      origin: ['http://localhost:5173','http://localhost:3000',"https://thumblify-clinet.vercel.app"],
@@ -25,8 +26,8 @@ app.use(cors({
 
 }))
 
-app.set('trust proxy',1)
 
+app.use(express.json())
 app.use(session({
     secret:process.env.SESSION_SECRET  as string,
     resave:false,
@@ -44,7 +45,7 @@ app.use(session({
     })
     
 }))
-app.use(express.json())
+
 app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');
 });
